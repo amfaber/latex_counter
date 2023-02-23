@@ -8,3 +8,7 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.1.6", features = ["derive"] }
 regex = "1.7.1"
+
+[[bin]]
+name = "texwc"
+path = "src/main.rs"

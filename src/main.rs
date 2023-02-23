@@ -1,11 +1,11 @@
-use std::{path::PathBuf, ops::{RangeFrom, Range, Index}};
+use std::path::PathBuf;
 
 use clap::Parser;
 use regex::RegexBuilder;
 
 #[derive(Parser)]
 struct Args {
-    filename: PathBuf,
+    filename: Option<PathBuf>,
 }
 
 #[derive(Default, Debug)]
@@ -86,9 +86,13 @@ fn figure_out_parents(sections: &mut Vec<Section>){
 fn main() {
     let args = Args::parse();
 
-    let contents = std::fs::read_to_string(&args.filename).expect(&format!(
+    let filename = args.filename.unwrap_or("main.tex".into());
+
+    
+    
+    let contents = std::fs::read_to_string(&filename).expect(&format!(
         "Couldn't find the provided file: {}",
-        args.filename
+        filename
             .as_os_str()
             .to_str()
             .expect("Couldn't find the provided file, and couldn't display the fault file name")
